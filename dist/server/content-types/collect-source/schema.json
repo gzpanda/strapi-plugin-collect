@@ -1,0 +1,46 @@
+{
+    "kind": "collectionType",
+    "collectionName": "collect_sources",
+    "info": {
+        "singularName": "collect-source",
+        "pluralName": "collect-sources",
+        "displayName": "Collect-Source",
+        "description": "采集源"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "kind": {
+            "type": "enumeration",
+            "enum": ["media", "book"],
+            "required": true,
+            "default": "media",
+            "configurable": false
+        },
+        "name": {
+            "type": "string",
+            "required": true,
+            "configurable": false
+        },
+        "url": {
+            "type": "string",
+            "required": true,
+            "configurable": false
+        },
+        "content": {
+            "type": "enumeration",
+            "enum": ["json", "xml"],
+            "required": true,
+            "default": "json",
+            "configurable": false
+        },
+        "class": {
+            "type": "boolean",
+            "required": true,
+            "default": false,
+            "configurable": false
+        }
+    }
+}
