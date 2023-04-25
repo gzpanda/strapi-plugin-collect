@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collect_classes",
+  "info": {
+    "singularName": "collect-class",
+    "pluralName": "collect-classes",
+    "displayName": "Collect-Class",
+    "description": "采集源的视频分类"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "scid": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "type_id": {
+      "type": "integer",
+      "required": true,
+      "configurable": false
+    },
+    "type_name": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "source": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::collect.collect-source",
+      "required": true,
+      "configurable": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category",
+      "configurable": false
+    }
+  }
+}
