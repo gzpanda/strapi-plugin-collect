@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-collect",
-  "version": "0.0.3",
+  "version": "0.8.0",
   "description": "This is the description of the plugin.",
   "strapi": {
     "name": "collect",
@@ -50,6 +50,9 @@
   "scripts": {
     "develop": "tsc -p tsconfig.server.json -w",
     "build": "tsc -p tsconfig.server.json"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "license": "MIT"
 }
