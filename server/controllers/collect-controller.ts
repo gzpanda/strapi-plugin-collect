@@ -1,4 +1,5 @@
-import { exec, execSync } from 'node:child_process';
+import { exec, execSync, spawn } from 'node:child_process';
+import fs from 'node:fs';
 import { Strapi } from '@strapi/strapi';
 
 export default ({ strapi }: { strapi: Strapi }) => ({
@@ -42,7 +43,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       const result = await strapi
         .plugin('collect')
         .service('collect')
-        .updateSource(params.id);
+        .updateClassSource(params.id);
 
       ctx.body = result;
     } catch (e) {
@@ -73,21 +74,39 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         });
       }
 
-      // exec(
-      //   'collect vod detail --sourceid=' + params.id,
-      //   (error, stdout, stderr) => {
-      //     if (error) {
-      //       console.error(`exec error: ${error}`);
-      //       return;
-      //     }
-      //     console.log(`stdout: ${stdout}`);
-      //     console.error(`stderr: ${stderr}`);
-      //   }
-      // );
+      if (source.all) {
+        return (ctx.body = {
+          errors: 'This source has been all vods - Class Controller',
+        });
+      }
 
-      exec('collect vod detail --sourceid=' + params.id);
+      const logPath = './logs/';
 
-      ctx.body = source;
+      if (!fs.existsSync(logPath)) {
+        fs.mkdirSync(logPath);
+      }
+
+      const logFile = logPath + 'vod-detail-all-' + params.id + '.log';
+      const errLogFile = logPath + 'vod-detail-all-' + params.id + '-error.log';
+
+      // fs.openSync(logFile, 'w');
+      // fs.openSync(errLogFile, 'w');
+
+      spawn('collect', ['vod', 'detail', '--sourceid=' + params.id], {
+        detached: true,
+        stdio: [
+          'ignore',
+          fs.openSync(logFile, 'w'),
+          fs.openSync(errLogFile, 'w'),
+        ],
+      });
+
+      const result = await strapi
+        .plugin('collect')
+        .service('collect')
+        .updateAllSource(params.id);
+
+      ctx.body = result;
     } catch (e) {
       ctx.throw(500, e);
     }
@@ -115,18 +134,6 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           errors: 'Class has not been generated - Class Controller',
         });
       }
-
-      // exec(
-      //   'collect vod detail --sourceid=' + params.id + ' --interval=168',
-      //   (error, stdout, stderr) => {
-      //     if (error) {
-      //       console.error(`exec error: ${error}`);
-      //       return;
-      //     }
-      //     console.log(`stdout: ${stdout}`);
-      //     console.error(`stderr: ${stderr}`);
-      //   }
-      // );
 
       exec('collect vod detail --sourceid=' + params.id + ' --interval=168');
 

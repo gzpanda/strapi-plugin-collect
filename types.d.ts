@@ -5,6 +5,7 @@ export type Source = {
   url: string;
   content: string;
   class: boolean;
+  all: boolean;
   publishedAt: string | null;
 };
 

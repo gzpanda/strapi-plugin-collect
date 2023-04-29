@@ -4,7 +4,6 @@ export default [
     path: '/sources',
     handler: 'collect.getAllSources',
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -13,7 +12,6 @@ export default [
     path: '/sources/createclass/:id',
     handler: 'collect.createClass',
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -22,7 +20,6 @@ export default [
     path: '/sources/createVideoAll/:id',
     handler: 'collect.createVideoAll',
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -31,7 +28,6 @@ export default [
     path: '/sources/createVideoWeekend/:id',
     handler: 'collect.createVideoWeekend',
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -40,7 +36,6 @@ export default [
     path: '/sources/createVideo24Hour/:id',
     handler: 'collect.createVideo24Hour',
     config: {
-      auth: false,
       policies: [],
     },
   },

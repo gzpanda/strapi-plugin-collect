@@ -40,6 +40,7 @@ export const CollectSources = ({ sources, fetchSources }: Props) => {
 
   async function handleAllBtnClick(source: Source) {
     await collect.createVideoAll(source.id);
+    fetchSources();
   }
 
   async function handleWeekendBtnClick(source: Source) {
@@ -72,25 +73,25 @@ export const CollectSources = ({ sources, fetchSources }: Props) => {
           <Tr>
             <Th
               action={
-                <IconButton label="Sort on ID" icon={<CarretDown />} noBorder />
+                <IconButton label='Sort on ID' icon={<CarretDown />} noBorder />
               }
             >
-              <Typography variant="sigma">ID</Typography>
+              <Typography variant='sigma'>ID</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Name</Typography>
+              <Typography variant='sigma'>Name</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Kind</Typography>
+              <Typography variant='sigma'>Kind</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">URL</Typography>
+              <Typography variant='sigma'>URL</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Content</Typography>
+              <Typography variant='sigma'>Content</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Class</Typography>
+              <Typography variant='sigma'>Class</Typography>
             </Th>
             <Th>
               <VisuallyHidden>Actions</VisuallyHidden>
@@ -101,7 +102,7 @@ export const CollectSources = ({ sources, fetchSources }: Props) => {
           {sources.map((source) => (
             <Tr key={source.id}>
               <Td>
-                <Typography textColor="neutral800">{source.id}</Typography>
+                <Typography textColor='neutral800'>{source.id}</Typography>
               </Td>
               <Td>
                 <TextButton
@@ -111,61 +112,62 @@ export const CollectSources = ({ sources, fetchSources }: Props) => {
                     );
                   }}
                 >
-                  <Typography textColor="primary700">{source.name}</Typography>
+                  <Typography textColor='primary700'>{source.name}</Typography>
                 </TextButton>
               </Td>
               <Td>
-                <Typography textColor="primary700">{source.kind}</Typography>
+                <Typography textColor='primary700'>{source.kind}</Typography>
               </Td>
               <Td>
-                <Typography textColor="primary700">{source.url}</Typography>
+                <Typography textColor='primary700'>{source.url}</Typography>
               </Td>
               <Td>
-                <Typography textColor="primary700">{source.content}</Typography>
+                <Typography textColor='primary700'>{source.content}</Typography>
               </Td>
               <Td>
-                <Typography textColor="primary700">
+                <Typography textColor='primary700'>
                   <ToggleCheckbox
                     disabled={source.class}
-                    onLabel="True"
-                    offLabel="False"
+                    onLabel='True'
+                    offLabel='False'
                     checked={source.class}
                     onChange={() => handleCreateClass(source)}
-                    size="S"
+                    size='S'
                   >
                     The field is required?
                   </ToggleCheckbox>
                 </Typography>
               </Td>
               <Td>
-                <Flex justifyContent="justify-evenly">
-                  <Flex paddingLeft="5px" paddingRight="5px">
+                <Flex justifyContent='justify-evenly'>
+                  <Flex paddingLeft='5px' paddingRight='5px'>
                     <Button
-                      variant="secondary"
+                      variant='secondary'
+                      disabled={source.all}
                       onClick={() => handleAllBtnClick(source)}
                     >
                       All
                     </Button>
                   </Flex>
-                  <Flex paddingLeft="5px" paddingRight="5px">
+                  <Flex paddingLeft='5px' paddingRight='5px'>
                     <Button
-                      variant="secondary"
+                      variant='secondary'
                       onClick={() => handleWeekendBtnClick(source)}
                     >
                       Weekend
                     </Button>
                   </Flex>
-                  <Flex paddingLeft="5px" paddingRight="5px">
+                  <Flex paddingLeft='5px' paddingRight='5px'>
                     <Button
-                      variant="secondary"
+                      variant='secondary'
                       onClick={() => handle24HourBtnClick(source)}
                     >
                       24H
                     </Button>
                   </Flex>
-                  <Flex paddingLeft="5px" paddingRight="5px">
+                  <Flex paddingLeft='5px' paddingRight='5px'>
                     <Button
-                      variant="secondary"
+                      variant='secondary'
                       onClick={() => history.push(`${pluginBasePath}/cron`)}
                     >
                       CRON

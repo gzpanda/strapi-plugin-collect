@@ -41,6 +41,12 @@
       "required": true,
       "default": false,
       "configurable": false
+    },
+    "all": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "configurable": false
     }
   }
 }

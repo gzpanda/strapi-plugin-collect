@@ -16,10 +16,18 @@ export default ({ strapi }: { strapi: Strapi }) => ({
     return strapi.entityService.findOne('plugin::collect.collect-source', id);
   },
 
-  async updateSource(id: number) {
+  async updateClassSource(id: number) {
     return strapi.entityService.update('plugin::collect.collect-source', id, {
       data: {
         class: true,
+      },
+    });
+  },
+
+  async updateAllSource(id: number) {
+    return strapi.entityService.update('plugin::collect.collect-source', id, {
+      data: {
+        all: true,
       },
     });
   },
