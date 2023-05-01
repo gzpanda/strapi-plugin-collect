@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-collect",
-  "version": "0.8.0",
+  "version": "0.10.3",
   "description": "This is the description of the plugin.",
   "strapi": {
     "name": "collect",
