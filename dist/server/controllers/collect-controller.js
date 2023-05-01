@@ -1,10 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_child_process_1 = require("node:child_process");
-const node_fs_1 = __importDefault(require("node:fs"));
 exports.default = ({ strapi }) => ({
     async getAllSources(ctx) {
         try {
@@ -74,21 +70,9 @@ exports.default = ({ strapi }) => ({
                     errors: 'This source has been all vods - Class Controller',
                 });
             }
-            const logPath = './logs/';
-            if (!node_fs_1.default.existsSync(logPath)) {
-                node_fs_1.default.mkdirSync(logPath);
-            }
-            const logFile = logPath + 'vod-detail-all-' + params.id + '.log';
-            const errLogFile = logPath + 'vod-detail-all-' + params.id + '-error.log';
-            // fs.openSync(logFile, 'w');
-            // fs.openSync(errLogFile, 'w');
             (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--sourceid=' + params.id], {
                 detached: true,
-                stdio: [
-                    'ignore',
-                    node_fs_1.default.openSync(logFile, 'w'),
-                    node_fs_1.default.openSync(errLogFile, 'w'),
-                ],
+                stdio: ['ignore'],
             });
             const result = await strapi
                 .plugin('collect')
@@ -120,7 +104,11 @@ exports.default = ({ strapi }) => ({
                     errors: 'Class has not been generated - Class Controller',
                 });
             }
-            (0, node_child_process_1.exec)('collect vod detail --sourceid=' + params.id + ' --interval=168');
+            // exec('collect vod detail --sourceid=' + params.id + ' --interval=168');
+            (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--interval=168', '--sourceid=' + params.id], {
+                detached: true,
+                stdio: ['ignore'],
+            });
             ctx.body = source;
         }
         catch (e) {
@@ -158,7 +146,11 @@ exports.default = ({ strapi }) => ({
             //     console.error(`stderr: ${stderr}`);
             //   }
             // );
-            (0, node_child_process_1.exec)('collect vod detail --sourceid=' + params.id + ' --interval=24');
+            // exec('collect vod detail --sourceid=' + params.id + ' --interval=24');
+            (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--interval=24', '--sourceid=' + params.id], {
+                detached: true,
+                stdio: ['ignore'],
+            });
             ctx.body = source;
         }
         catch (e) {

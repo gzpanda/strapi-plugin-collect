@@ -1,5 +1,4 @@
 import { exec, execSync, spawn } from 'node:child_process';
-import fs from 'node:fs';
 import { Strapi } from '@strapi/strapi';
 
 export default ({ strapi }: { strapi: Strapi }) => ({
@@ -80,25 +79,9 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         });
       }
 
-      const logPath = './logs/';
-
-      if (!fs.existsSync(logPath)) {
-        fs.mkdirSync(logPath);
-      }
-
-      const logFile = logPath + 'vod-detail-all-' + params.id + '.log';
-      const errLogFile = logPath + 'vod-detail-all-' + params.id + '-error.log';
-
-      // fs.openSync(logFile, 'w');
-      // fs.openSync(errLogFile, 'w');
-
       spawn('collect', ['vod', 'detail', '--sourceid=' + params.id], {
         detached: true,
-        stdio: [
-          'ignore',
-          fs.openSync(logFile, 'w'),
-          fs.openSync(errLogFile, 'w'),
-        ],
+        stdio: ['ignore'],
       });
 
       const result = await strapi
@@ -135,7 +118,15 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         });
       }
 
-      exec('collect vod detail --sourceid=' + params.id + ' --interval=168');
+      // exec('collect vod detail --sourceid=' + params.id + ' --interval=168');
+      spawn(
+        'collect',
+        ['vod', 'detail', '--interval=168', '--sourceid=' + params.id],
+        {
+          detached: true,
+          stdio: ['ignore'],
+        }
+      );
 
       ctx.body = source;
     } catch (e) {
@@ -177,7 +168,15 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       //   }
       // );
 
-      exec('collect vod detail --sourceid=' + params.id + ' --interval=24');
+      // exec('collect vod detail --sourceid=' + params.id + ' --interval=24');
+      spawn(
+        'collect',
+        ['vod', 'detail', '--interval=24', '--sourceid=' + params.id],
+        {
+          detached: true,
+          stdio: ['ignore'],
+        }
+      );
 
       ctx.body = source;
     } catch (e) {
