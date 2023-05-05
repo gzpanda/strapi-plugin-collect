@@ -72,7 +72,7 @@ exports.default = ({ strapi }) => ({
             }
             (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--sourceid=' + params.id], {
                 detached: true,
-                stdio: ['ignore'],
+                stdio: 'ignore',
             });
             const result = await strapi
                 .plugin('collect')
@@ -107,7 +107,7 @@ exports.default = ({ strapi }) => ({
             // exec('collect vod detail --sourceid=' + params.id + ' --interval=168');
             (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--interval=168', '--sourceid=' + params.id], {
                 detached: true,
-                stdio: ['ignore'],
+                stdio: 'ignore',
             });
             ctx.body = source;
         }
@@ -149,7 +149,7 @@ exports.default = ({ strapi }) => ({
             // exec('collect vod detail --sourceid=' + params.id + ' --interval=24');
             (0, node_child_process_1.spawn)('collect', ['vod', 'detail', '--interval=24', '--sourceid=' + params.id], {
                 detached: true,
-                stdio: ['ignore'],
+                stdio: 'ignore',
             });
             ctx.body = source;
         }

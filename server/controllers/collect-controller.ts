@@ -1,4 +1,4 @@
-import { exec, execSync, spawn } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { Strapi } from '@strapi/strapi';
 
 export default ({ strapi }: { strapi: Strapi }) => ({
@@ -81,7 +81,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
 
       spawn('collect', ['vod', 'detail', '--sourceid=' + params.id], {
         detached: true,
-        stdio: ['ignore'],
+        stdio: 'ignore',
       });
 
       const result = await strapi
@@ -124,7 +124,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         ['vod', 'detail', '--interval=168', '--sourceid=' + params.id],
         {
           detached: true,
-          stdio: ['ignore'],
+          stdio: 'ignore',
         }
       );
 
@@ -174,7 +174,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         ['vod', 'detail', '--interval=24', '--sourceid=' + params.id],
         {
           detached: true,
-          stdio: ['ignore'],
+          stdio: 'ignore',
         }
       );
 
